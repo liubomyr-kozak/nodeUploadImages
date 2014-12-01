@@ -1,0 +1,22 @@
+###############################################################################
+#  https://github.com/betamax/getImageData/tree/master/server-examples/node/  #
+###############################################################################
+Firstly, you will need node.js which you can get here.
+
+As a dependency to the gm module, you will need to install GraphicsMagick which you can do with the following command (it requires homebrew) on OS X:
+
+brew install graphicsmagick
+To download the server, you can run this command:
+
+git clone git://github.com/betamax/getImageData.git
+Note: this will download all the files from the project. Alternatively, you can download the project from github using the download button.
+
+To install the dependencies of the project run:
+
+npm install
+That should be all you need to do to get the server running.
+
+///
+/// install to the systems
+
+

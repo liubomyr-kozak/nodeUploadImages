@@ -1,0 +1,1 @@
+// "jquery-image-blob":"https://github.com/CoeJoder/jquery.image.blob.git"
