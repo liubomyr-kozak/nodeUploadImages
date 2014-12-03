@@ -1,16 +1,17 @@
 {
-  "name"         : "node-gtest",
-  "version"      : "0.0.0",
-  "description"  : "Gtest",
-  "main"         : "server.js",
-  "author"       : "Scotch",
-  "dependencies" : {
-    "express"    : "~4.7.2",
-    "mongoose"   : "~3.6.2",
-    "morgan"     : "~1.2.2",
-    "angular"     : "",
+  "name": "node-gtest",
+  "version": "0.0.0",
+  "description": "Gtest",
+  "main": "server.js",
+  "author": "Scotch",
+  "dependencies": {
+    "express": "~4.7.2",
+    "mongoose": "~3.6.2",
+    "morgan": "~1.2.2",
+    "angular": "",
     "body-parser": "~1.5.2",
     "method-override": "~2.1.2",
-     "gm": "~1.14.2"
-    }
+    "gm": "~1.14.2",
+    "vksdk": "~4.6.0"
+  }
 }

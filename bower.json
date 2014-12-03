@@ -1,7 +1,7 @@
 {
   "name": "gtest",
   "version": "0.0.0",
-  "directory" : "public/components",
+  "directory": "public/components",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -13,6 +13,6 @@
     "angular": "",
     "angular-route": "",
     "angular-cookies": "",
-    "jquery":""
+    "jquery": ""
   }
 }
