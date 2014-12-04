@@ -7,6 +7,9 @@ var fs = require('fs');                               // create our app w/ expre
 var request = require('request');
 var bodyParser = require('body-parser');
 
+var https = require('https'); //Https module of Node.js
+var FormData = require('form-data'); //Pretty multipart form maker.
+
 // IMAGE FEATU
 var gm = require('gm'),
   imageMagick = gm.subClass({imageMagick: true});
@@ -18,7 +21,7 @@ app.use(bodyParser.urlencoded({'extended': 'true'}));            // parse applic
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse
 app.listen(8888);
-console.log("App listening on port 8888");
+
 
 // application -------------------------------------------------------------
 app.get('*', function (req, res) {
@@ -27,9 +30,14 @@ app.get('*', function (req, res) {
 
 // routes ======================================================================
 
+var urlImg;
 app.post('/image/', function (req, res) {
-  var url = "https://www.npmjs.org/static/img/npm.png";
-  handleUrl(url, res);
+
+  urlImg = "https://www.npmjs.org/static/img/npm.png";
+
+
+  handleUrl(urlImg, res);
+
 });
 
 var handleUrl = function (url, res) {
@@ -37,7 +45,9 @@ var handleUrl = function (url, res) {
   // Couldn't have done this without the help of bxjx (http://stackoverflow.com/users/373903)
   var onDownloadSuccess = function (error, response, body) {
     if (!error && response.statusCode == 200) {
+
       handleFile(response, res, body, url);
+
     }
     else res.send("Third-party server error", response.statusCode);
   };
@@ -46,6 +56,8 @@ var handleUrl = function (url, res) {
 };
 
 var handleFile = function (response, res, body, url) {
+
+
   var mimetype = response.headers["content-type"];
 
   if (isImageFile(mimetype)) {
@@ -66,11 +78,26 @@ var isImageFile = function (mimetype) {
 
 var handleImage = function (response, body) {
 
-  var image_64 = body.toString('base64');
+  var form = new FormData(),
+      __dirname = "/tmp/",
+      filename = __dirname + urlImg.substring(urlImg.lastIndexOf('/') + 1);
 
-  var data = JSON.stringify(image_64);
+  form.append('file', fs.createReadStream(filename));
 
-  response.writeHead(200, {'Content-Type': 'application/json; charset=UTF-8'});
+  //console.log(form);
+
+
+  //fs.writeFile(filename, buffer, function (err) { });
+  //
+  //
+  //
+  //
+  //var image_64 = body.toString('base64');
+  //
+  var data = JSON.stringify(form);
+  //
+  response.writeHead(200, {
+    'Content-Type': "image/jpeg"});
   response.end(data);
 };
 
@@ -163,3 +190,28 @@ var handleImage = function (response, body) {
 // });
 
 
+
+//
+//var ACCESS_TOKEN = "PUT_FB_ACCESS_TOKEN_HERE";
+//
+//
+////POST request options, notice 'path' has access_token parameter
+//var options = {
+//  method: 'post',
+//  host: 'graph.facebook.com',
+//  path: '/me/photos?access_token='+ACCESS_TOKEN,
+//  headers: form.getHeaders(),
+//}
+//
+////Do POST request, callback for response
+//var request = https.request(options, function (res){
+//  console.log(res);
+//});
+//
+////Binds form to request
+//form.pipe(request);
+//
+////If anything goes wrong (request-wise not FB)
+//request.on('error', function (error) {
+//  console.log(error);
+//});

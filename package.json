@@ -12,6 +12,7 @@
     "body-parser": "~1.5.2",
     "method-override": "~2.1.2",
     "gm": "~1.14.2",
-    "vksdk": "~4.6.0"
+    "vksdk": "~4.6.0",
+    "form-data": ""
   }
 }
